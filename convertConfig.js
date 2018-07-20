@@ -11,11 +11,11 @@ module.exports = {
     root: publicRootPath,
     nejPathConfig: {
         custom: {
-            pro: '/src/javascript/',
-            fedlib: '/src/javascript/lib/kaola-fed-lib/',
-            nevPro: '/src/javascript/lib/nev/'
+            pro: 'src/javascript/',
+            fedlib: 'src/javascript/lib/kaola-fed-lib/',
+            nevPro: 'src/javascript/lib/nev/'
         },
-        defineJs: '/src/javascript/lib/kaola-fed-lib/lib/nej/src/'
+        defineJs: 'src/javascript/lib/kaola-fed-lib/lib/nej/src/'
     },
     pathMaps: [
         {

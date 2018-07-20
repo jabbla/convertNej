@@ -1,3 +1,3 @@
 const PathResolver = require('./PathResolver.js');
 
-console.log(PathResolver.do('./multiple.select.js', __dirname));
+console.log(PathResolver.do('base/multiple.select.js', __dirname));

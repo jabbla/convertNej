@@ -35,11 +35,12 @@ Resolver.parseNejPath = function(nejPath, curModulePath){
         let {dir} = path.parse(nejPath);
         let root = convertConfig.root;
         let customNejPathConfig = convertConfig.nejPathConfig.custom;
-
+        let rootPath = convertConfig.root;
+        
         /**自定义别名 */
         for(let alias in customNejPathConfig){
             if(alias === dir){
-                result = path.resolve(customNejPathConfig[alias], this._deleteFirstSection(nejPath))
+                result = path.resolve(rootPath, customNejPathConfig[alias], this._deleteFirstSection(nejPath))
                 return result;
             }
         }
@@ -47,12 +48,11 @@ Resolver.parseNejPath = function(nejPath, curModulePath){
         /**默认别名 */
         for(let alias in nejDefaultAlias){
             if(alias === dir){
-                result = path.resolve(nejDefaultAlias[alias], this._deleteFirstSection(nejPath))
+                result = path.resolve(rootPath, nejDefaultAlias[alias], this._deleteFirstSection(nejPath))
                 return result;
             }
         }
     }else{
-        debugger;
         result = path.resolve(curModulePath, nejPath);
     }
 
