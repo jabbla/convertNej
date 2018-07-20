@@ -1,0 +1,43 @@
+<div class="m-multipleSelect {class} m-indicator-select" ref="element" r-style={{"line-height":height+'px',"height":height+'px',"width":width+'px'}}>
+    <div style="height:100%" on-click={this.toggle()}>
+        <input class="u-multipleSelect-hd" r-style={{"padding-right":height+'px'}} value={value} title={value} placeholder={placeholder} disabled />
+        <a class="u-selectArrow" r-style={{"height":(height-2)+'px',"width":(height-2)+'px'}}></a>
+    </div>
+    <div class="u-multipleSelect-bd" r-style={{"width":(width-2)+'px',"top":(height-1)+'px'}} r-hide={!open}>
+        {#if titleTip}
+            <div class="u-titleTip">{titleTip}</div>
+        {/if}
+        <div class="u-selectedList">已选指标：
+            {#list this.reOrder(checked.list) as indicator by indicator_index}
+            {indicator.name}{#if indicator_index < checked.list.length -1}
+                ,
+                {/if}
+            {/list}
+        </div>
+        <div class="m-bd">
+            <checkboxGroup ref="checkGroup" checked={checked} on-check={this.onCheck($event)}>
+                <div>
+                    {#if enableCateMode}
+                        {#list unionedSource as cate}
+                            <h4 class="u-cate-title">{cate.title}</h4>
+                            {#list cate.list as checker}
+                                <checkboxGroup-check label={checker.name} disable={this.isDisableChecked(checker)} item={checker}/>
+                            {/list}
+                        {/list}
+                    {#else}
+                        {#list source as item} <checkboxGroup-check label={item.name} disable={this.isDisableChecked(item)} item={item}/> {/list}
+                    {/if}
+                </div>
+            </checkboxGroup>
+        </div>
+        <div class="m-ft">
+            <button class="u-btn-small u-btn-active" r-class={{'u-btn-disable': checked.list.length<min}} on-click={this.onOK()}>确认</button>
+            <button class="u-btn-small u-btn-default" on-click={this.onCancel()}>取消</button>
+            <button class="u-btn-small u-btn-default f-fr" on-click={this.onReset()}>恢复默认</button>
+            {#if max == null}
+            <button class="u-btn-small u-btn-default f-fr" on-click={this.onSelectAll()}>全选</button>
+            {/if}
+            <button class="u-btn-small u-btn-default f-fr" on-click={this.onEmpty()}>清空</button>
+        </div>
+    </div>
+</div>
